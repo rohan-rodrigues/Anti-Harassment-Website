@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<!--
+	Spatial by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Anti-Harassment</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+        <link rel="icon" href="images/reidius_logo.png">
+        <script type="text/javascript" src="//media.twiliocdn.com/sdk/js/client/v1.3/twilio.min.js"></script>
+        <script type="text/javascript" src="administrator.json"></script>
+        <script type="text/javascript" src="/assets/js/config.js"></script>
+        <script type="text/javascript" src="/assets/js/main.js"></script>
+        <script type="text/javascript" src="/assets/js/main.js"></script>
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header">
+				<h1><strong><a href="index.html">Anti-Harassment</a></strong> by Reidius</h1>
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="button.html">Safety Button</a></li>
+						<li><a href="research.html">Research</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+
+		<!-- Main -->
+			<section id="main" class="wrapper">
+				<div class="container">
+
+					<header class="major special">
+						<h2>Safety Button</h2>
+						<p>When you're feeling unsafe press the unsafe button and hold the fingerprint button. If you release the fingerprint button in unsafe mode for more than 1 minute, the police will be contacted.</p>
+					</header>      
+                    
+                    <div id="buttons" align="center" style="margin-bottom:30px">
+                    <button id="button1" onclick="safeFunction(1)">Safe</button>
+                    <button id="button2" onclick="safeFunction(-1)">Unsafe</button>
+                    </div>
+               
+                    <center><button id="fingerprint" width="100%" height="450px"><img src="images/fingerprint.png" height="450px"></button></center>
+                    
+                    <script>
+                        var button1 = document.getElementById("button1");
+                        var button2 = document.getElementById("button2");
+                        var safe = true;
+                        var fingerprint = document.getElementById("fingerprint");
+                        fingerprint.onkeypress = startFunction();
+                        
+                        function safeFunction(num) {
+                            
+                            if (num == 1){
+                                button1.style.backgroundColor = "#66CD00";
+                                button2.style.backgroundColor = "#000000";
+                                safe = true;
+                            }
+                            else {
+                                button1.style.backgroundColor = "#000000";
+                                button2.style.backgroundColor = "#FF0000";
+                                safe = false;
+                            }
+                        }
+                        
+                        function startFunction() {
+                            var currentTime = new Date().getTime() / 1000;
+                            setTimeout(checkIfSafe, 60000);
+                        }
+                        
+                        function checkIfSafe() {
+                            if (!safe) {
+                                var config = require('./config');
+var client = require('twilio')(config.accountSid, config.authToken);
+
+module.exports.sendSms = function(to, message) {
+  client.messages.create({
+    body: message,
+    to: to,
+    from: config.sendingNumber
+    // mediaUrl: 'http://www.yourserver.com/someimage.png'
+  }, function(err, data) {
+    if (err) {
+      console.error('Could not notify police');
+      console.error(err);
+    } else {
+      console.log('Police notified');
+    }
+  });
+};
+                            }
+                        }
+                    </script>
+
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="container">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-facebook"></a></li>
+						<li><a href="#" class="icon fa-twitter"></a></li>
+						<li><a href="#" class="icon fa-instagram"></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Untitled</li>
+						<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
+						<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
