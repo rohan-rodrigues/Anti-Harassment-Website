@@ -4,7 +4,7 @@
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 */
 
-
+   
 (function($) {
 
 	skel.breakpoints({
@@ -19,6 +19,7 @@
 
 		var	$window = $(window),
 			$body = $('body');
+        
 
 		// Disable animations/transitions until the page has loaded.
 			$body.addClass('is-loading');
